@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import { ShoppingBag, Store, Bike, Check } from 'lucide-react';
 
 export function EcosystemSection() {
@@ -197,25 +196,6 @@ export function EcosystemSection() {
               preload="metadata"
               aria-label="LezzFlow 3-App Connected Ecosystem Video"
             />
-
-            {/* LezzFlow Watermark Badge overlay to cover Gemini watermark */}
-            <div className="ecosystem-video-watermark" aria-hidden="true">
-              <div className="ecosystem-watermark-pill">
-                <Image
-                  src="/assets/lezzflow-3d-mark.png"
-                  alt="LezzFlow Logo"
-                  width={20}
-                  height={20}
-                  className="w-5 h-5 object-contain"
-                  unoptimized
-                />
-                <span className="ecosystem-watermark-text">
-                  <span className="text-white font-bold">lezz</span>
-                  <span className="text-[#0076ff] font-bold">flow</span>
-                  <span className="text-[#00e5ff]">.</span>
-                </span>
-              </div>
-            </div>
           </div>
         </div>
 

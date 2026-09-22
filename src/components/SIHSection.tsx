@@ -28,31 +28,31 @@ export function SIHSection() {
             <div className="lg:col-span-5 flex flex-col items-center justify-center text-center">
               <div className="relative group">
                 {/* Glow ring */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-[#ff9933]/30 via-white/20 to-[#138808]/30 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute -inset-2 bg-gradient-to-r from-[#ff9933]/15 via-white/10 to-[#138808]/15 rounded-3xl blur-lg opacity-60" />
                 
                 {/* Logo Frame */}
-                <div className="relative w-48 h-48 sm:w-56 sm:h-56 p-6 rounded-2xl bg-[#060a12] border border-white/15 flex items-center justify-center shadow-2xl">
+                <div className="relative w-48 h-48 sm:w-56 sm:h-56 p-6 rounded-2xl bg-[#060a12] border border-white/15 flex items-center justify-center shadow-xl">
                   <Image
                     src="/images/sih-logo.png"
                     alt="Smart India Hackathon 2026 Official Logo"
                     width={220}
                     height={220}
-                    className="w-full h-full object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]"
+                    className="w-full h-full object-contain"
                     priority
                     unoptimized
                   />
                 </div>
               </div>
 
-              <div className="mt-5 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-[#7dd3fc]">
-                <Sparkles size={13} className="text-[#ffd700]" />
+              <div className="mt-5 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-sans text-slate-300">
+                <Sparkles size={13} className="text-[#38bdf8]" />
                 <span>Smart India Hackathon 2026</span>
               </div>
             </div>
 
             {/* Right: Big Bold Content */}
             <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0076ff]/15 border border-[#0076ff]/30 text-xs font-mono text-[#54a3ff]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0076ff]/10 border border-[#0076ff]/25 text-xs font-sans font-medium text-[#54a3ff]">
                 <Award size={14} />
                 <span>OFFICIAL HACKATHON ENTRY</span>
               </div>
@@ -92,7 +92,7 @@ export function SIHSection() {
               </div>
 
               {/* Hackathon Authority Badges */}
-              <div className="pt-3 border-t border-white/10 flex flex-wrap items-center gap-4 text-[11px] font-mono text-[#64748b]">
+              <div className="pt-3 border-t border-white/10 flex flex-wrap items-center gap-4 text-[11px] font-sans text-slate-400 font-medium">
                 <span className="flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#ff9933]" />
                   MoE&apos;s Innovation Cell

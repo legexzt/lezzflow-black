@@ -19,7 +19,7 @@ export default function TermsPage() {
             width={32}
             height={32}
             unoptimized
-            className="w-8 h-8 object-contain filter drop-shadow-[0_0_10px_rgba(0,118,255,0.4)]"
+            className="w-8 h-8 object-contain"
           />
           <span className="font-['Space_Grotesk'] tracking-tight">
             <span>Lezz</span>

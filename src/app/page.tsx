@@ -304,8 +304,8 @@ export default function Home() {
       >
         <div className="flex items-center justify-between pb-4 mb-3 border-b border-white/10">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#00e5ff] animate-pulse" />
-            <span className="text-[11px] font-mono tracking-widest text-[#00e5ff] uppercase">Navigation</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#0076ff]" />
+            <span className="text-[11px] font-sans font-medium tracking-wider text-slate-300 uppercase">Navigation</span>
           </div>
           <button
             type="button"
@@ -374,22 +374,6 @@ export default function Home() {
         id="main-content"
         style={showWelcome ? { opacity: 0, pointerEvents: 'none', visibility: 'hidden' } : {}}
       >
-        {/* Launch Status Strip */}
-        <div className="launch-status-bar" role="region" aria-label="Project Launch Status">
-          <div className="launch-status-container">
-            <span className="status-indicator" aria-hidden="true">
-              <span className="status-ping" />
-              <span className="status-core" />
-            </span>
-            <span className="status-label">LAUNCH STATUS:</span>
-            <span className="status-current">Pre-Launch Beta</span>
-            <span className="status-arrow" aria-hidden="true">
-              →
-            </span>
-            <span className="status-next">Pilot: coming soon</span>
-          </div>
-        </div>
-
         {/* 3. Hero Section with 3D Brand Mark */}
         <section className="hero" id="home" aria-labelledby="hero-title">
           <div className="hero-grid" aria-hidden="true" />
@@ -599,8 +583,8 @@ export default function Home() {
             <p className="site-footer-tagline">
               Hyperlocal commerce platform connecting customers with verified nearby neighbourhood stores for direct, sub-10-minute delivery.
             </p>
-            <div className="inline-flex items-center gap-2 mt-2 px-3 py-1 rounded-full border border-white/10 bg-[#0e1420] text-[11px] font-mono text-[#54a3ff]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#10b981]" />
+            <div className="inline-flex items-center gap-2 mt-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.04] text-[11px] font-sans font-medium text-slate-300">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#0076ff]" />
               <span>Pre-Launch Beta • SIH 2026</span>
             </div>
           </div>

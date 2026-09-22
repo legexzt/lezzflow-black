@@ -271,10 +271,10 @@ export function WaitlistSection({
                 We have registered your invitation request. We will notify you the moment LezzFlow launches in your neighbourhood.
               </p>
               <div className="success-badge-row flex items-center justify-center gap-3 mb-6">
-                <span className="success-queue-chip px-3.5 py-1 rounded-full text-xs font-mono font-semibold bg-[#00e5ff]/15 text-[#00e5ff] border border-[#00e5ff]/30">
+                <span className="success-queue-chip px-3.5 py-1 rounded-full text-xs font-sans font-medium bg-[#0076ff]/15 text-[#54a3ff] border border-[#0076ff]/30">
                   Spot reserved
                 </span>
-                <span className="success-role-chip px-3.5 py-1 rounded-full text-xs font-mono font-semibold bg-white/10 text-white border border-white/15">
+                <span className="success-role-chip px-3.5 py-1 rounded-full text-xs font-sans font-medium bg-white/10 text-white border border-white/15">
                   Role: {savedData.role}
                 </span>
               </div>

@@ -200,7 +200,7 @@ export function MerchantSection({ onSelectRole }: { onSelectRole?: (role: string
 
             <div className="benefit-list">
               <div className="benefit-item">
-                <div className="benefit-icon-box text-[#ffd700] border-[#ffd700]/30 bg-[#ffd700]/10">
+                <div className="benefit-icon-box text-[#54a3ff] border-[#0076ff]/25 bg-[#0076ff]/10">
                   <ScanBarcode size={22} />
                 </div>
                 <div>
@@ -212,7 +212,7 @@ export function MerchantSection({ onSelectRole }: { onSelectRole?: (role: string
               </div>
 
               <div className="benefit-item">
-                <div className="benefit-icon-box text-[#ffd700] border-[#ffd700]/30 bg-[#ffd700]/10">
+                <div className="benefit-icon-box text-[#54a3ff] border-[#0076ff]/25 bg-[#0076ff]/10">
                   <TrendingUp size={22} />
                 </div>
                 <div>
@@ -224,7 +224,7 @@ export function MerchantSection({ onSelectRole }: { onSelectRole?: (role: string
               </div>
 
               <div className="benefit-item">
-                <div className="benefit-icon-box text-[#ffd700] border-[#ffd700]/30 bg-[#ffd700]/10">
+                <div className="benefit-icon-box text-[#54a3ff] border-[#0076ff]/25 bg-[#0076ff]/10">
                   <ShieldCheck size={22} />
                 </div>
                 <div>
