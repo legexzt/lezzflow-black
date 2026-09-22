@@ -1,0 +1,66 @@
+[
+  {
+    "target": "public/images/market/hero-local-market.webp",
+    "id": 13369323,
+    "photographer": "Swastik Arora",
+    "photographer_url": "https://www.pexels.com/@swastikarora",
+    "alt": "A bustling street shop in India with people shopping and motorcycles parked outside.",
+    "dimensions": "1600x1066"
+  },
+  {
+    "target": "public/images/customers/customer-shopping-india.webp",
+    "id": 37695265,
+    "photographer": "Roman Saienko",
+    "photographer_url": "https://www.pexels.com/@roman-saienko",
+    "alt": "Local shoppers visit a small neighborhood shop in Tiruchirappalli, Tamil Nadu, India.",
+    "dimensions": "1600x1068"
+  },
+  {
+    "target": "public/images/sellers/seller-inventory.webp",
+    "id": 26861411,
+    "photographer": "Pexels User",
+    "photographer_url": "https://www.pexels.com/@pexels-user-1476227307",
+    "alt": "A middle-aged man working in a colorful, bustling Indian grocery store filled with diverse products.",
+    "dimensions": "1600x1066"
+  },
+  {
+    "target": "public/images/entrepreneurs/entrepreneur-local-business.webp",
+    "id": 36818382,
+    "photographer": "pierre matile",
+    "photographer_url": "https://www.pexels.com/@open-borders",
+    "alt": "Rustic Indian shop with people and a cat in a village setting, showcasing traditional merchandise.",
+    "dimensions": "1600x1066"
+  },
+  {
+    "target": "public/images/suppliers/supplier-wholesale.webp",
+    "id": 11835352,
+    "photographer": "Antonius Natan",
+    "photographer_url": "https://www.pexels.com/@antonius-natan-2511019",
+    "alt": "Vibrant warehouse scene showcasing rows of stocked shelves and busy shoppers with carts.",
+    "dimensions": "1600x1200"
+  },
+  {
+    "target": "public/images/market/hyperlocal-market.webp",
+    "id": 17160607,
+    "photographer": "Pramod  Tiwari",
+    "photographer_url": "https://www.pexels.com/@pramodtiwari",
+    "alt": "Colorful street market in India featuring fresh fruits and vegetables under blue tarps.",
+    "dimensions": "1600x1066"
+  },
+  {
+    "target": "public/images/customers/product-discovery-demand.webp",
+    "id": 8422707,
+    "photographer": "Kampus Production",
+    "photographer_url": "https://www.pexels.com/@kampus",
+    "alt": "A shopkeeper assists elderly customers in a vibrant Portuguese grocery store.",
+    "dimensions": "1600x1068"
+  },
+  {
+    "target": "public/images/entrepreneurs/business-opportunity-planning.webp",
+    "id": 3735172,
+    "photographer": "Polina Tankilevitch",
+    "photographer_url": "https://www.pexels.com/@polina-tankilevitch",
+    "alt": "Young man managing a zero waste retail store, focused on ethical shopping and sustainability.",
+    "dimensions": "1600x1066"
+  }
+]
