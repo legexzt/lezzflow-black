@@ -2687,17 +2687,25 @@ body, html {
   justify-content: center;
 }
 
+.ecosystem-video-wrapper {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
 .ecosystem-video-frame {
   position: relative;
   width: 100%;
-  max-width: 680px;
   aspect-ratio: 1 / 1;
   border-radius: 24px;
   background: #070a10;
   border: 1px solid rgba(0, 118, 255, 0.3);
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75), 0 0 45px rgba(0, 118, 255, 0.14);
   overflow: hidden;
-  margin: 0 auto;
+  cursor: pointer;
 }
 
 .ecosystem-video {
@@ -2708,7 +2716,6 @@ body, html {
   object-fit: contain;
   z-index: 5;
   opacity: 0;
-  cursor: pointer;
   pointer-events: auto;
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   background: #000;
@@ -2718,46 +2725,154 @@ body, html {
   opacity: 1;
 }
 
-.ecosystem-video-controls {
+/* Center Play Button Overlay (Visible ONLY when paused) */
+.eco-video-center-play {
   position: absolute;
-  bottom: 1.1rem;
-  right: 1.1rem;
-  z-index: 10;
+  inset: 0;
+  z-index: 12;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  background: rgba(4, 7, 13, 0.42);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.eco-video-center-play:hover {
+  background: rgba(4, 7, 13, 0.25);
+}
+
+.eco-center-play-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(0, 118, 255, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 118, 255, 0.5), 0 0 24px rgba(0, 229, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.eco-video-center-play:hover .eco-center-play-circle {
+  transform: scale(1.1);
+  background: #0076ff;
+}
+
+.eco-center-play-label {
+  font-family: var(--font-geist-sans), -apple-system, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 0.4rem 1rem;
+  background: rgba(14, 21, 38, 0.85);
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  letter-spacing: 0.02em;
+}
+
+/* Dedicated Media Toolbar Underneath Video (Zero Subtitle Obstruction!) */
+.ecosystem-video-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  background: #0c121d;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.eco-toolbar-actions,
+.eco-toolbar-meta {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.eco-video-ctrl-btn {
+.eco-toolbar-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.42rem 0.85rem;
-  background: rgba(10, 16, 28, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 99px;
-  color: #ffffff;
+  padding: 0.45rem 0.85rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  color: #d1d9e6;
   font-family: var(--font-geist-sans), -apple-system, sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
   user-select: none;
 }
 
-.eco-video-ctrl-btn:hover {
-  background: rgba(0, 118, 255, 0.25);
-  border-color: rgba(0, 118, 255, 0.5);
+.eco-toolbar-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
   transform: translateY(-1px);
 }
 
-.eco-video-ctrl-btn.is-active {
+.eco-toolbar-btn.eco-btn-primary {
+  background: rgba(0, 118, 255, 0.2);
+  border-color: rgba(0, 118, 255, 0.45);
+  color: #54a3ff;
+  font-weight: 600;
+}
+
+.eco-toolbar-btn.eco-btn-primary:hover {
   background: rgba(0, 118, 255, 0.35);
-  border-color: rgba(0, 229, 255, 0.6);
+  color: #ffffff;
+}
+
+.eco-toolbar-btn.eco-btn-active {
+  background: rgba(0, 229, 255, 0.15);
+  border-color: rgba(0, 229, 255, 0.4);
   color: #00e5ff;
+}
+
+.eco-views-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  font-family: var(--font-geist-sans), -apple-system, sans-serif;
+  font-size: 0.8rem;
+  color: #9baec8;
+}
+
+.eco-views-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3ddc97;
+  box-shadow: 0 0 6px #3ddc97;
+}
+
+.eco-views-count {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.eco-views-label {
+  color: #728298;
+}
+
+.eco-share-btn:hover {
+  border-color: rgba(0, 118, 255, 0.5);
 }
 
 .ecosystem-fallback {

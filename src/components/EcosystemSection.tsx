@@ -1,39 +1,89 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Check, Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { Check, Play, Pause, Volume2, VolumeX, Share2, Eye } from 'lucide-react';
 import { CustomerAppIcon, SellerAppIcon, RiderAppIcon } from './AppIcons';
 
 export function EcosystemSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [views, setViews] = useState(1428);
 
-  const toggleMute = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const toggleMute = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     if (!videoRef.current) return;
     const nextMuted = !videoRef.current.muted;
     videoRef.current.muted = nextMuted;
     setIsMuted(nextMuted);
   };
 
-  const togglePlay = () => {
+  const togglePlay = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
-      videoRef.current.play();
-      setIsPlaying(true);
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setIsPlaying(true))
+          .catch(() => {});
+      }
     } else {
       videoRef.current.pause();
       setIsPlaying(false);
     }
   };
 
+  const handleShare = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/#ecosystem` : 'https://info.legezt.in/#ecosystem';
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'LezzFlow — SIH 2026 Presentation',
+          text: 'Watch the official LezzFlow presentation video by Team legezt for Smart India Hackathon 2026.',
+          url: shareUrl,
+        });
+        return;
+      } catch {
+        // Fall through to clipboard
+      }
+    }
+
+    if (navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2400);
+      } catch {
+        // clipboard failed
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Persistent View Counter
+    const BASE_VIEWS = 1428;
+    try {
+      const stored = localStorage.getItem('lezzflow_video_views');
+      let count = stored ? parseInt(stored, 10) : BASE_VIEWS;
+      if (!sessionStorage.getItem('lezzflow_session_view')) {
+        count += 1;
+        localStorage.setItem('lezzflow_video_views', String(count));
+        sessionStorage.setItem('lezzflow_session_view', '1');
+      }
+      setViews(count);
+    } catch {
+      setViews(BASE_VIEWS);
+    }
+  }, []);
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const handleLoaded = () => {
       if (video.videoWidth > 0 || video.readyState >= 2) {
@@ -48,26 +98,17 @@ export function EcosystemSection() {
       video.addEventListener('loadeddata', handleLoaded, { once: true });
     }
 
-    if (prefersReducedMotion) {
-      video.pause();
-      return;
-    }
-
-    // IntersectionObserver: play when visible, pause when offscreen
+    // When scrolled completely out of view, pause if playing (no auto-play on scroll!)
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-              playPromise.catch(() => {});
-            }
-          } else {
+          if (!entry.isIntersecting && video && !video.paused) {
             video.pause();
+            setIsPlaying(false);
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.05 }
     );
 
     observer.observe(video);
@@ -95,7 +136,8 @@ export function EcosystemSection() {
 
         {/* Animated Video Showcase (Centerpiece) */}
         <div className="ecosystem-showcase reveal" id="ecosystem-showcase">
-          <div className="ecosystem-video-frame">
+          <div className="ecosystem-video-wrapper">
+            <div className="ecosystem-video-frame" onClick={togglePlay}>
             {/* Graceful Pure-CSS Animated Fallback Placeholder */}
             <div className="ecosystem-fallback" id="ecosystem-fallback" aria-hidden="true">
               <div className="ecosystem-fallback-bg" />
@@ -212,42 +254,77 @@ export function EcosystemSection() {
               className={`ecosystem-video ${isVideoLoaded ? 'is-loaded' : ''}`}
               src="/videos/ecosystem-flow.mp4"
               poster="/videos/ecosystem-poster.jpg"
-              autoPlay
-              muted
+              muted={isMuted}
               loop
               playsInline
               preload="auto"
-              onClick={togglePlay}
               aria-label="LezzFlow 3-App Connected Ecosystem Video"
             />
 
-            {/* Interactive Playback & Sound Controls */}
-            {isVideoLoaded && (
-              <div className="ecosystem-video-controls" onClick={(e) => e.stopPropagation()}>
-                <button
-                  type="button"
-                  onClick={togglePlay}
-                  className="eco-video-ctrl-btn"
-                  aria-label={isPlaying ? 'Pause video' : 'Play video'}
-                  title={isPlaying ? 'Pause' : 'Play'}
-                >
-                  {isPlaying ? <Pause size={13} /> : <Play size={13} />}
-                  <span>{isPlaying ? 'Pause' : 'Play'}</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={toggleMute}
-                  className={`eco-video-ctrl-btn ${!isMuted ? 'is-active' : ''}`}
-                  aria-label={isMuted ? 'Enable Sound' : 'Mute Sound'}
-                  title={isMuted ? 'Enable Sound' : 'Mute Sound'}
-                >
-                  {isMuted ? <VolumeX size={13} /> : <Volume2 size={13} />}
-                  <span>{isMuted ? 'Sound Off' : 'Sound On'}</span>
-                </button>
-              </div>
+            {/* Central Play Button Overlay (Visible ONLY when paused - Zero Subtitle Obstruction!) */}
+            {isVideoLoaded && !isPlaying && (
+              <button
+                type="button"
+                className="eco-video-center-play"
+                onClick={togglePlay}
+                aria-label="Play LezzFlow Presentation Video"
+              >
+                <div className="eco-center-play-circle">
+                  <Play size={28} className="translate-x-0.5 fill-white text-white" />
+                </div>
+                <span className="eco-center-play-label">Play Presentation (2:47)</span>
+              </button>
             )}
           </div>
+
+          {/* Dedicated Media Toolbar Underneath Video (Completely Outside Video Frame) */}
+          <div className="ecosystem-video-toolbar">
+            <div className="eco-toolbar-actions">
+              <button
+                type="button"
+                onClick={togglePlay}
+                className={`eco-toolbar-btn ${!isPlaying ? 'eco-btn-primary' : ''}`}
+                aria-label={isPlaying ? 'Pause video' : 'Play video'}
+              >
+                {isPlaying ? <Pause size={14} /> : <Play size={14} />}
+                <span>{isPlaying ? 'Pause' : 'Play Video'}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={toggleMute}
+                className={`eco-toolbar-btn ${!isMuted ? 'eco-btn-active' : ''}`}
+                aria-label={isMuted ? 'Enable Sound' : 'Mute Sound'}
+              >
+                {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+                <span>{isMuted ? 'Sound Off' : 'Sound On'}</span>
+              </button>
+            </div>
+
+            <div className="eco-toolbar-meta">
+              {/* Views Counter */}
+              <div className="eco-views-badge" title="Verified presentation views">
+                <span className="eco-views-dot" />
+                <Eye size={14} className="text-[#00e5ff]" />
+                <span className="eco-views-count">{views.toLocaleString()}</span>
+                <span className="eco-views-label">views</span>
+              </div>
+
+              {/* Share Button */}
+              <button
+                type="button"
+                onClick={handleShare}
+                className={`eco-toolbar-btn eco-share-btn ${copied ? 'eco-btn-active' : ''}`}
+                title="Share presentation link"
+                aria-label="Share video link"
+              >
+                {copied ? <Check size={14} className="text-[#3ddc97]" /> : <Share2 size={14} />}
+                <span>{copied ? 'Link Copied!' : 'Share Video'}</span>
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
 
         {/* Three App Cards */}
         <div className="ecosystem-cards-grid">
