@@ -460,57 +460,275 @@ export function ConceptPreview() {
   );
 }
 
+function MemberAvatarSvg({ id }: { id: string }) {
+  switch (id) {
+    case 'MJ': // Mohd Jibraan - Lead
+      return (
+        <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
+          <defs>
+            <linearGradient id="bg-mj" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#082f49" />
+              <stop offset="100%" stopColor="#0284c7" />
+            </linearGradient>
+            <linearGradient id="skin-mj" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#fbd5b5" />
+              <stop offset="100%" stopColor="#e5a97e" />
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="50" r="46" fill="url(#bg-mj)" />
+          {/* Collar/Hoodie */}
+          <path d="M22 92 C26 72, 40 68, 50 68 C60 68, 74 72, 78 92 Z" fill="#0f172a" />
+          <path d="M42 69 L50 82 L58 69 Z" fill="#0284c7" />
+          {/* Neck */}
+          <rect x="44" y="60" width="12" height="12" rx="3" fill="#e5a97e" />
+          {/* Head & Face */}
+          <ellipse cx="50" cy="46" rx="17" ry="19" fill="url(#skin-mj)" />
+          {/* Modern Hair */}
+          <path d="M31 43 C31 28, 42 24, 56 24 C68 24, 70 32, 69 41 C66 34, 58 32, 46 33 C37 34, 33 38, 31 43 Z" fill="#18181b" />
+          {/* Cyber Glasses */}
+          <rect x="36" y="42" width="11" height="7" rx="2" stroke="#00e5ff" strokeWidth="1.8" fill="#00e5ff22" />
+          <rect x="53" y="42" width="11" height="7" rx="2" stroke="#00e5ff" strokeWidth="1.8" fill="#00e5ff22" />
+          <line x1="47" y1="45" x2="53" y2="45" stroke="#00e5ff" strokeWidth="1.8" />
+          {/* Tech Headset */}
+          <path d="M30 44 C27 44, 27 50, 30 50 L32 50 L32 44 Z" fill="#00e5ff" />
+          <path d="M30 49 Q34 60 42 60" stroke="#00e5ff" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="43" cy="60" r="2" fill="#00e5ff" />
+          {/* Smile */}
+          <path d="M45 56 Q50 60 55 56" stroke="#b45309" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      );
+    case 'SR': // Syed Salman Razvi - Core Systems
+      return (
+        <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
+          <defs>
+            <linearGradient id="bg-sr" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#2e1065" />
+              <stop offset="100%" stopColor="#6366f1" />
+            </linearGradient>
+            <linearGradient id="skin-sr" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#fed7aa" />
+              <stop offset="100%" stopColor="#fba973" />
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="50" r="46" fill="url(#bg-sr)" />
+          {/* Hoodie */}
+          <path d="M22 92 C26 72, 40 68, 50 68 C60 68, 74 72, 78 92 Z" fill="#1e1b4b" />
+          <path d="M43 69 L50 80 L57 69 Z" fill="#818cf8" />
+          {/* Neck */}
+          <rect x="44" y="60" width="12" height="12" rx="3" fill="#fba973" />
+          {/* Face */}
+          <ellipse cx="50" cy="46" rx="17" ry="19" fill="url(#skin-sr)" />
+          {/* Hair Crop */}
+          <path d="M31 42 C30 28, 43 25, 52 25 C64 25, 69 31, 69 40 C65 33, 56 31, 46 32 C38 33, 33 37, 31 42 Z" fill="#09090b" />
+          {/* Eyes & Eyebrows */}
+          <path d="M38 41 Q42 39 46 41" stroke="#27272a" strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M54 41 Q58 39 62 41" stroke="#27272a" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="42" cy="45" r="2.2" fill="#18181b" />
+          <circle cx="58" cy="45" r="2.2" fill="#18181b" />
+          {/* Smile */}
+          <path d="M45 56 Q50 59 55 56" stroke="#c2410c" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      );
+    case 'MB': // Muskan Begum - UI/UX
+      return (
+        <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
+          <defs>
+            <linearGradient id="bg-mb" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#064e3b" />
+              <stop offset="100%" stopColor="#10b981" />
+            </linearGradient>
+            <linearGradient id="skin-mb" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#ffedd5" />
+              <stop offset="100%" stopColor="#fed7aa" />
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="50" r="46" fill="url(#bg-mb)" />
+          {/* Hijab / Designer Drape */}
+          <path d="M22 92 C25 70, 40 66, 50 66 C60 66, 75 70, 78 92 Z" fill="#042f2e" />
+          <path d="M30 45 C30 26, 42 24, 50 24 C58 24, 70 26, 70 45 C70 64, 60 70, 50 70 C40 70, 30 64, 30 45 Z" fill="#0f766e" />
+          {/* Inner Face Oval */}
+          <ellipse cx="50" cy="47" rx="14" ry="16" fill="url(#skin-mb)" />
+          {/* Expressive Eyes */}
+          <ellipse cx="43" cy="45" rx="2" ry="2.2" fill="#134e4a" />
+          <ellipse cx="57" cy="45" rx="2" ry="2.2" fill="#134e4a" />
+          <path d="M39 41 Q43 38 47 40" stroke="#042f2e" strokeWidth="1.2" />
+          <path d="M53 40 Q57 38 61 41" stroke="#042f2e" strokeWidth="1.2" />
+          {/* Cheerful Smile */}
+          <path d="M46 54 Q50 58 54 54" stroke="#f43f5e" strokeWidth="1.6" strokeLinecap="round" />
+          {/* Designer Pearl Earring highlight */}
+          <circle cx="34" cy="52" r="2.2" fill="#6ee7b7" />
+        </svg>
+      );
+    case 'SN': // Shaista Naaz - Cloud & Frontend
+      return (
+        <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
+          <defs>
+            <linearGradient id="bg-sn" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#4c0519" />
+              <stop offset="100%" stopColor="#f43f5e" />
+            </linearGradient>
+            <linearGradient id="skin-sn" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#ffedd5" />
+              <stop offset="100%" stopColor="#fbcfe8" />
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="50" r="46" fill="url(#bg-sn)" />
+          {/* Attire */}
+          <path d="M22 92 C25 70, 40 66, 50 66 C60 66, 75 70, 78 92 Z" fill="#881337" />
+          <path d="M30 45 C30 26, 42 24, 50 24 C58 24, 70 26, 70 45 C70 64, 60 70, 50 70 C40 70, 30 64, 30 45 Z" fill="#be123c" />
+          {/* Face Oval */}
+          <ellipse cx="50" cy="47" rx="14" ry="16" fill="url(#skin-sn)" />
+          {/* Eyes */}
+          <ellipse cx="43" cy="45" rx="2" ry="2.2" fill="#4c0519" />
+          <ellipse cx="57" cy="45" rx="2" ry="2.2" fill="#4c0519" />
+          <path d="M40 41 Q43 39 47 41" stroke="#4c0519" strokeWidth="1.2" />
+          <path d="M53 41 Q57 39 60 41" stroke="#4c0519" strokeWidth="1.2" />
+          {/* Smile */}
+          <path d="M46 54 Q50 57 54 54" stroke="#fb7185" strokeWidth="1.6" strokeLinecap="round" />
+          {/* Glowing tech pin */}
+          <circle cx="66" cy="52" r="2.2" fill="#fda4af" />
+        </svg>
+      );
+    case 'AR': // Abdul Rahman Mohd Ghouse - Database
+      return (
+        <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
+          <defs>
+            <linearGradient id="bg-ar" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#451a03" />
+              <stop offset="100%" stopColor="#f59e0b" />
+            </linearGradient>
+            <linearGradient id="skin-ar" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#fed7aa" />
+              <stop offset="100%" stopColor="#fba973" />
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="50" r="46" fill="url(#bg-ar)" />
+          {/* Jacket */}
+          <path d="M22 92 C26 72, 40 68, 50 68 C60 68, 74 72, 78 92 Z" fill="#292524" />
+          <path d="M43 69 L50 82 L57 69 Z" fill="#f59e0b" />
+          {/* Neck */}
+          <rect x="44" y="60" width="12" height="12" rx="3" fill="#fba973" />
+          {/* Face */}
+          <ellipse cx="50" cy="46" rx="17" ry="19" fill="url(#skin-ar)" />
+          {/* Hair */}
+          <path d="M31 40 C31 27, 43 25, 52 25 C64 25, 69 31, 69 39 C64 34, 56 31, 46 32 C38 33, 33 36, 31 40 Z" fill="#1c1917" />
+          {/* Glasses */}
+          <rect x="36" y="42" width="11" height="7" rx="2" stroke="#fef08a" strokeWidth="1.5" fill="#fef08a18" />
+          <rect x="53" y="42" width="11" height="7" rx="2" stroke="#fef08a" strokeWidth="1.5" fill="#fef08a18" />
+          <line x1="47" y1="45" x2="53" y2="45" stroke="#fef08a" strokeWidth="1.5" />
+          {/* Smile */}
+          <path d="M46 56 Q50 59 54 56" stroke="#b45309" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      );
+    case 'MT': // Muttahir Talha Habeeb - Mobile & QA
+    default:
+      return (
+        <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
+          <defs>
+            <linearGradient id="bg-mt" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#0c4a6e" />
+              <stop offset="100%" stopColor="#38bdf8" />
+            </linearGradient>
+            <linearGradient id="skin-mt" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#fbd5b5" />
+              <stop offset="100%" stopColor="#fba973" />
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="50" r="46" fill="url(#bg-mt)" />
+          {/* Hoodie */}
+          <path d="M22 92 C26 72, 40 68, 50 68 C60 68, 74 72, 78 92 Z" fill="#0f172a" />
+          <path d="M43 69 L50 82 L57 69 Z" fill="#38bdf8" />
+          {/* Neck */}
+          <rect x="44" y="60" width="12" height="12" rx="3" fill="#fba973" />
+          {/* Face */}
+          <ellipse cx="50" cy="46" rx="17" ry="19" fill="url(#skin-mt)" />
+          {/* Modern Hair cut */}
+          <path d="M31 41 C31 27, 43 24, 52 24 C64 24, 69 29, 69 38 C64 33, 56 31, 46 32 C38 33, 33 36, 31 41 Z" fill="#18181b" />
+          {/* Eyes */}
+          <circle cx="42" cy="45" r="2.2" fill="#0f172a" />
+          <circle cx="58" cy="45" r="2.2" fill="#0f172a" />
+          {/* Smile */}
+          <path d="M45 56 Q50 59 55 56" stroke="#b45309" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      );
+  }
+}
+
 export function TeamSection() {
   const members = [
     {
-      initials: 'MJ',
+      id: 'MJ',
       name: 'Mohd Jibraan',
       role: 'Team Leader',
+      specialty: 'Systems Architect',
       highlight: true,
+      glowColor: 'rgba(0, 229, 255, 0.28)',
+      borderColor: 'border-[#00e5ff]/40',
+      badgeBg: 'bg-[#0076ff] text-white',
     },
     {
-      initials: 'SR',
+      id: 'SR',
       name: 'Syed Salman Razvi',
       role: 'Member, Team legezt',
+      specialty: 'Core Backend',
       highlight: false,
+      glowColor: 'rgba(99, 102, 241, 0.22)',
+      borderColor: 'border-[#818cf8]/30',
+      badgeBg: 'bg-[#4f46e5]/20 text-[#a5b4fc]',
     },
     {
-      initials: 'MB',
+      id: 'MB',
       name: 'Muskan Begum',
       role: 'Member, Team legezt',
+      specialty: 'UI/UX & Product',
       highlight: false,
+      glowColor: 'rgba(16, 185, 129, 0.22)',
+      borderColor: 'border-[#34d399]/30',
+      badgeBg: 'bg-[#059669]/20 text-[#6ee7b7]',
     },
     {
-      initials: 'SN',
+      id: 'SN',
       name: 'Shaista Naaz',
       role: 'Member, Team legezt',
+      specialty: 'Cloud & Frontend',
       highlight: false,
+      glowColor: 'rgba(244, 63, 94, 0.22)',
+      borderColor: 'border-[#fb7185]/30',
+      badgeBg: 'bg-[#e11d48]/20 text-[#fda4af]',
     },
     {
-      initials: 'AR',
+      id: 'AR',
       name: 'Abdul Rahman Mohd Ghouse',
       role: 'Member, Team legezt',
+      specialty: 'Database & DevOps',
       highlight: false,
+      glowColor: 'rgba(245, 158, 11, 0.22)',
+      borderColor: 'border-[#fbbf24]/30',
+      badgeBg: 'bg-[#d97706]/20 text-[#fde68a]',
     },
     {
-      initials: 'MT',
+      id: 'MT',
       name: 'Muttahir Talha Habeeb',
       role: 'Member, Team legezt',
+      specialty: 'Mobile App & QA',
       highlight: false,
+      glowColor: 'rgba(56, 189, 248, 0.22)',
+      borderColor: 'border-[#38bdf8]/30',
+      badgeBg: 'bg-[#0284c7]/20 text-[#7dd3fc]',
     },
   ];
 
   return (
     <section className="section commerce-team" id="team" aria-labelledby="team-title">
       <div className="section-label reveal">
-        <span>06 / THE TEAM</span>
-        <span>TEAM LEGEZT · SIH 2026</span>
+        <span>THE TEAM</span>
+        <span>SIX BUILDERS · ONE MISSION</span>
       </div>
       <div className="commerce-heading reveal">
         <h2 id="team-title">
-          Built by <span>legezt.</span>
+          Built by <span className="text-white">legezt<span className="text-[#0076ff]">.</span></span>
         </h2>
-        <p>Six builders. One mission: bring India&apos;s neighbourhood commerce online.</p>
+        <p>Six passionate builders bringing India&apos;s neighbourhood commerce online.</p>
       </div>
       <div className="team-lineup">
         {members.map((member, i) => (
@@ -519,17 +737,46 @@ export function TeamSection() {
             key={member.name}
             style={{ transitionDelay: `${i * 55}ms` }}
           >
-            <div className="team-initials transition-all duration-300 group-hover:border-[#54a3ff]/40 group-hover:shadow-[0_0_25px_rgba(84,163,255,0.15)]">
-              <span className="team-idx">0{i + 1}</span>
-              <span className="team-initials-text">{member.initials}</span>
-              {member.highlight && (
-                <span className="team-badge" aria-label="Team Leader badge">
-                  LEAD
-                </span>
-              )}
+            <div
+              className={`team-initials relative flex flex-col items-center justify-center p-4 transition-all duration-300 group-hover:scale-[1.02] ${member.borderColor}`}
+              style={{
+                boxShadow: `0 10px 30px rgba(0,0,0,0.5)`,
+              }}
+            >
+              <span className="team-idx font-mono text-[11px] text-[#5d7596] absolute top-3 right-3">
+                0{i + 1}
+              </span>
+
+              {/* Glowing Avatar Portrait */}
+              <div
+                className="w-20 h-20 sm:w-24 sm:h-24 rounded-full p-1 transition-transform duration-300 group-hover:scale-105"
+                style={{
+                  boxShadow: `0 0 25px ${member.glowColor}`,
+                }}
+              >
+                <div className="w-full h-full rounded-full overflow-hidden border-2 border-white/20 shadow-inner">
+                  <MemberAvatarSvg id={member.id} />
+                </div>
+              </div>
+
+              {/* Tag / Badge */}
+              <div className="mt-3 flex items-center justify-center">
+                {member.highlight ? (
+                  <span className="px-2.5 py-0.5 rounded-full text-[9px] font-bold font-mono tracking-wider uppercase bg-[#0076ff] text-white shadow-md shadow-[#0076ff]/40">
+                    TEAM LEAD
+                  </span>
+                ) : (
+                  <span className={`px-2 py-0.5 rounded-full text-[9px] font-medium font-mono tracking-wider uppercase ${member.badgeBg}`}>
+                    {member.specialty}
+                  </span>
+                )}
+              </div>
             </div>
-            <h3>{member.name}</h3>
-            <p className={member.highlight ? 'text-[#54a3ff] font-medium' : 'text-[#73849c]'}>
+
+            <h3 className="text-sm font-semibold text-white mt-4 mb-1 group-hover:text-[#54a3ff] transition-colors">
+              {member.name}
+            </h3>
+            <p className={member.highlight ? 'text-xs text-[#54a3ff] font-medium' : 'text-xs text-[#73849c]'}>
               {member.role}
             </p>
           </article>

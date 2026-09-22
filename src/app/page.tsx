@@ -16,7 +16,8 @@ import {
 } from '@/components/SplitShowcase';
 import { StatsBandSection } from '@/components/StatsBand';
 import { WaitlistSection } from '@/components/WaitlistSection';
-import { ConceptPreview, TeamSection } from '@/components/CommerceStory';
+import { TeamSection } from '@/components/CommerceStory';
+import { SIHSection } from '@/components/SIHSection';
 import { FAQSection } from '@/components/FAQSection';
 
 // Dynamic SSR-safe 3D WebGL scenes with Image fallbacks
@@ -259,8 +260,8 @@ export default function Home() {
           <a href="#sellers">Merchants</a>
           <a href="#partners">Fleet</a>
           <a href="#stats">Targets</a>
-          <a href="#demo">Demo</a>
           <a href="#team">The team</a>
+          <a href="#sih">SIH 2026</a>
           <a href="#faq">FAQ</a>
           <a
             href="#waitlist"
@@ -334,11 +335,11 @@ export default function Home() {
           <a href="#stats" onClick={() => setIsMobileMenuOpen(false)}>
             06 / Architecture Targets
           </a>
-          <a href="#demo" onClick={() => setIsMobileMenuOpen(false)}>
-            07 / Interactive Demo
-          </a>
           <a href="#team" onClick={() => setIsMobileMenuOpen(false)}>
-            08 / The Team
+            07 / The Team
+          </a>
+          <a href="#sih" onClick={() => setIsMobileMenuOpen(false)}>
+            08 / SIH 2026 Showcase
           </a>
           <a href="#faq" onClick={() => setIsMobileMenuOpen(false)}>
             09 / FAQ
@@ -381,7 +382,7 @@ export default function Home() {
               <span className="status-core" />
             </span>
             <span className="status-label">LAUNCH STATUS:</span>
-            <span className="status-current">Concept — SIH 2026</span>
+            <span className="status-current">Pre-Launch Beta</span>
             <span className="status-arrow" aria-hidden="true">
               →
             </span>
@@ -416,8 +417,11 @@ export default function Home() {
               >
                 Join the Waitlist <span>↓</span>
               </a>
-              <a className="button button-outline" href="#demo">
-                Explore the demo
+              <a
+                className="button button-outline"
+                href="#how-it-works"
+              >
+                How it works <span>↓</span>
               </a>
             </div>
             <div className="mt-4 flex items-center gap-4">
@@ -437,7 +441,7 @@ export default function Home() {
               </a>
             </div>
             <p className="hero-concept-note">
-              TEAM LEGEZT <span> / </span> SIH 2026 CONCEPT
+              TEAM LEGEZT <span> / </span> HYPERLOCAL PLATFORM
             </p>
           </div>
 
@@ -515,29 +519,14 @@ export default function Home() {
         {/* 13. 07 / WAITLIST — Priority Access with Role Pills, Confetti Burst & LocalStorage */}
         <WaitlistSection selectedRole={selectedRole} onRoleChange={setSelectedRole} />
 
-        {/* 14. 08 / INTERACTIVE DEMO — Live Walkthrough */}
-        <section className="section demo-section" id="demo" aria-labelledby="demo-title">
-          <div className="section-label reveal">
-            <span>THE PRODUCT / TRY IT YOURSELF</span>
-            <span>ONE ORDER. TWO CONNECTED SIDES.</span>
-          </div>
-          <div className="commerce-heading reveal">
-            <h2 id="demo-title">
-              From “Do they have it?”<br />
-              <span>to “Found it nearby.”</span>
-            </h2>
-            <p>
-              Explore a sample shopping journey. Then step behind the counter to see how it connects.
-            </p>
-          </div>
-          <ConceptPreview />
-        </section>
-
-        {/* 15. 09 / FAQ SECTION */}
-        <FAQSection />
-
-        {/* 16. 10 / THE TEAM — Team legezt (SIH 2026) */}
+        {/* 14. THE TEAM — Team legezt */}
         <TeamSection />
+
+        {/* 15. SMART INDIA HACKATHON 2026 SHOWCASE */}
+        <SIHSection />
+
+        {/* 16. FAQ SECTION */}
+        <FAQSection />
       </main>
 
       {/* 17. Finale Footer with 3D Ribbons and Energy Pulse */}
@@ -630,9 +619,9 @@ export default function Home() {
             <div className="site-footer-col">
               <h4 className="site-footer-col-title">Project</h4>
               <a href="#team">Team legezt</a>
+              <a href="#sih">SIH 2026 Showcase</a>
               <a href="#stats">Engineering Targets</a>
               <a href="#waitlist">Priority Access</a>
-              <a href="#demo">Interactive Demo</a>
               <span className="text-xs text-[#526074]">Smart India Hackathon 2026</span>
             </div>
 
@@ -654,7 +643,9 @@ export default function Home() {
         {/* Monumental Fluid Wordmark */}
         <div className="footer-monumental-wordmark" aria-hidden="true">
           <span className="monumental-text">
-            lezzflow<span className="text-[#0076ff]">.</span>
+            <span className="text-white">lezz</span>
+            <span className="text-[#0076ff]">flow</span>
+            <span className="text-[#00e5ff]">.</span>
           </span>
         </div>
 

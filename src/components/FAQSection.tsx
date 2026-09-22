@@ -185,13 +185,17 @@ export function FAQSection() {
           </p>
         </div>
         <a
-          href="https://lezzflow-app.vercel.app/#waitlist"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded bg-[#eeeeeb] text-[#111] font-medium text-sm hover:bg-white transition-all transform hover:-translate-y-0.5 min-h-[44px] shrink-0"
+          href="#waitlist"
+          onClick={(e) => {
+            e.preventDefault();
+            const el = document.getElementById('waitlist');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm transition-all transform hover:-translate-y-0.5 min-h-[46px] shrink-0 shadow-lg shadow-white/10 hover:shadow-white/20 cursor-pointer"
+          style={{ backgroundColor: '#ffffff', color: '#0a0d14' }}
         >
-          <span>Join the Waitlist</span>
-          <ArrowUpRight size={16} aria-hidden="true" />
+          <span style={{ color: '#0a0d14', fontWeight: 700 }}>Join the Waitlist</span>
+          <ArrowUpRight size={16} aria-hidden="true" style={{ color: '#0a0d14', strokeWidth: 2.5 }} />
         </a>
       </div>
     </section>
