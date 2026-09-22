@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96" fill="none">
+  <!-- Tile: Dark rounded-square tile (~22% radius), fill #141a26, 1px border rgba(255,255,255,0.08) -->
+  <rect x="1" y="1" width="94" height="94" rx="21" fill="#141a26" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  
+  <!-- Rear Wheel & Front Wheel: Two perfect circles, 2px rounded stroke -->
+  <circle cx="28" cy="55" r="11" stroke="#a78bfa" stroke-width="2"/>
+  <circle cx="68" cy="55" r="11" stroke="#a78bfa" stroke-width="2"/>
+  
+  <!-- Bicycle Frame: Clean geometric frame lines, no rider figure -->
+  <!-- Rear stay to seat, and seat tube to bottom bracket -->
+  <path d="M 28 55 L 38 39 L 45 55 L 28 55" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Top tube and down tube -->
+  <path d="M 38 39 H 58 L 45 55" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Front fork from headset to front hub -->
+  <path d="M 58 39 L 68 55" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Seat post & Saddle -->
+  <path d="M 38 39 V 33" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 33 33 H 43" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Stem & Handlebar -->
+  <path d="M 58 39 V 32" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 54 32 H 62" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/>
+</svg>

@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { ShoppingBag, Store, Bike, Check } from 'lucide-react';
+import { Check } from 'lucide-react';
+import { CustomerAppIcon, SellerAppIcon, RiderAppIcon } from './AppIcons';
 
 export function EcosystemSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -139,23 +140,23 @@ export function EcosystemSection() {
                 <div className="eco-node eco-node-customer">
                   <div className="eco-node-pulse" />
                   <div className="eco-node-icon-box">
-                    <ShoppingBag size={22} />
+                    <CustomerAppIcon size={26} includeTile={false} />
                   </div>
                   <div className="eco-node-meta">
                     <span className="eco-node-badge">APP 01</span>
-                    <strong className="eco-node-label">Customer</strong>
-                    <span className="eco-node-sub">Instant Demand</span>
+                    <strong className="eco-node-label">LezzFlow Mart</strong>
+                    <span className="eco-node-sub">Customer App</span>
                   </div>
                 </div>
 
                 <div className="eco-node eco-node-mart">
                   <div className="eco-node-pulse" />
                   <div className="eco-node-icon-box">
-                    <Store size={22} />
+                    <SellerAppIcon size={26} includeTile={false} />
                   </div>
                   <div className="eco-node-meta">
                     <span className="eco-node-badge">APP 02</span>
-                    <strong className="eco-node-label">Mart</strong>
+                    <strong className="eco-node-label">LezzFlow Seller</strong>
                     <span className="eco-node-sub">Kirana Stock</span>
                   </div>
                 </div>
@@ -163,11 +164,11 @@ export function EcosystemSection() {
                 <div className="eco-node eco-node-delivery">
                   <div className="eco-node-pulse" />
                   <div className="eco-node-icon-box">
-                    <Bike size={22} />
+                    <RiderAppIcon size={26} includeTile={false} />
                   </div>
                   <div className="eco-node-meta">
                     <span className="eco-node-badge">APP 03</span>
-                    <strong className="eco-node-label">Delivery</strong>
+                    <strong className="eco-node-label">LezzFlow Partner</strong>
                     <span className="eco-node-sub">10-Min Dispatch</span>
                   </div>
                 </div>
@@ -178,7 +179,7 @@ export function EcosystemSection() {
                 <span className="eco-status-pill">
                   <span className="eco-status-signal" />
                   <span className="eco-status-text">
-                    Connected Loop: <strong>Customer</strong> → <strong>Mart</strong> → <strong>Delivery</strong>
+                    Connected Loop: <strong>LezzFlow Mart</strong> → <strong>LezzFlow Seller</strong> → <strong>LezzFlow Partner</strong>
                   </span>
                 </span>
               </div>
@@ -204,13 +205,11 @@ export function EcosystemSection() {
           {/* Card 1: Customer */}
           <article className="ecosystem-card reveal">
             <div className="eco-card-header">
-              <div className="eco-card-icon-wrap eco-icon-customer">
-                <ShoppingBag size={26} />
-              </div>
+              <CustomerAppIcon size={52} includeTile={true} />
               <span className="eco-app-role-pill">CUSTOMER APP</span>
             </div>
             <div className="eco-card-body">
-              <h3 className="eco-card-title">LezzFlow</h3>
+              <h3 className="eco-card-title">LezzFlow Mart</h3>
               <p className="eco-card-tagline">“Your neighbourhood, on demand.”</p>
               <ul className="eco-feature-list" aria-label="Customer App Features">
                 {[
@@ -220,7 +219,7 @@ export function EcosystemSection() {
                   'Ratings & re-order in one tap',
                 ].map((feat) => (
                   <li key={feat} className="flex items-center gap-2.5 text-sm text-[#b8c6d8]">
-                    <span className="text-[#00e5ff] shrink-0">
+                    <span className="text-[#4da3ff] shrink-0">
                       <Check size={16} strokeWidth={2.2} />
                     </span>
                     <span>{feat}</span>
@@ -237,15 +236,13 @@ export function EcosystemSection() {
           {/* Card 2: Seller */}
           <article className="ecosystem-card reveal" style={{ transitionDelay: '80ms' }}>
             <div className="eco-card-header">
-              <div className="eco-card-icon-wrap eco-icon-mart">
-                <Store size={26} />
-              </div>
+              <SellerAppIcon size={52} includeTile={true} />
               <span className="eco-app-role-pill">SELLER APP</span>
             </div>
             <div className="eco-card-body">
-              <h3 className="eco-card-title">LezzFlow Mart</h3>
+              <h3 className="eco-card-title">LezzFlow Seller</h3>
               <p className="eco-card-tagline">“Your kirana store, gone digital.”</p>
-              <ul className="eco-feature-list" aria-label="Mart App Features">
+              <ul className="eco-feature-list" aria-label="Seller App Features">
                 {[
                   'Go online in 10 minutes, zero commission onboarding',
                   'Instant order alerts & packing flow',
@@ -253,7 +250,7 @@ export function EcosystemSection() {
                   'Simple inventory & billing',
                 ].map((feat) => (
                   <li key={feat} className="flex items-center gap-2.5 text-sm text-[#b8c6d8]">
-                    <span className="text-[#ffd700] shrink-0">
+                    <span className="text-[#3ddc97] shrink-0">
                       <Check size={16} strokeWidth={2.2} />
                     </span>
                     <span>{feat}</span>
@@ -270,13 +267,11 @@ export function EcosystemSection() {
           {/* Card 3: Rider */}
           <article className="ecosystem-card reveal" style={{ transitionDelay: '160ms' }}>
             <div className="eco-card-header">
-              <div className="eco-card-icon-wrap eco-icon-delivery">
-                <Bike size={26} />
-              </div>
+              <RiderAppIcon size={52} includeTile={true} />
               <span className="eco-app-role-pill">RIDER APP</span>
             </div>
             <div className="eco-card-body">
-              <h3 className="eco-card-title">LezzFlow Delivery</h3>
+              <h3 className="eco-card-title">LezzFlow Partner</h3>
               <p className="eco-card-tagline">“Earn on every kilometre.”</p>
               <ul className="eco-feature-list" aria-label="Rider App Features">
                 {[
@@ -286,7 +281,7 @@ export function EcosystemSection() {
                   'Daily earnings dashboard',
                 ].map((feat) => (
                   <li key={feat} className="flex items-center gap-2.5 text-sm text-[#b8c6d8]">
-                    <span className="text-[#54a3ff] shrink-0">
+                    <span className="text-[#a78bfa] shrink-0">
                       <Check size={16} strokeWidth={2.2} />
                     </span>
                     <span>{feat}</span>

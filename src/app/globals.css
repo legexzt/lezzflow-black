@@ -2864,20 +2864,20 @@ body, html {
 }
 
 .eco-node-customer .eco-node-icon-box {
-  border-color: rgba(0, 118, 255, 0.5);
-  color: #54a3ff;
+  border-color: rgba(77, 163, 255, 0.45);
+  color: #4da3ff;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
 }
 
 .eco-node-mart .eco-node-icon-box {
-  border-color: rgba(56, 189, 248, 0.5);
-  color: #7dd3fc;
+  border-color: rgba(61, 220, 151, 0.45);
+  color: #3ddc97;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
 }
 
 .eco-node-delivery .eco-node-icon-box {
-  border-color: rgba(99, 102, 241, 0.5);
-  color: #a5b4fc;
+  border-color: rgba(167, 139, 250, 0.45);
+  color: #a78bfa;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
 }
 

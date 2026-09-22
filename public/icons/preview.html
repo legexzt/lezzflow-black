@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>App Icon Set Preview</title>
+  <style>
+    body {
+      background: #090d16;
+      color: #fff;
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .icon-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .label {
+      font-size: 11px;
+      color: #64748b;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <h2>96px Master Scale</h2>
+  <div class="row">
+    <div class="icon-wrap">
+      <img src="customer-app.svg" width="96" height="96" alt="Customer App">
+      <span class="label">Customer (#4da3ff)</span>
+    </div>
+    <div class="icon-wrap">
+      <img src="seller-app.svg" width="96" height="96" alt="Seller App">
+      <span class="label">Seller (#3ddc97)</span>
+    </div>
+    <div class="icon-wrap">
+      <img src="rider-app.svg" width="96" height="96" alt="Rider App">
+      <span class="label">Rider (#a78bfa)</span>
+    </div>
+  </div>
+
+  <h2>48px Verification Scale (Requirement)</h2>
+  <div class="row">
+    <div class="icon-wrap">
+      <img src="customer-app.svg" width="48" height="48" alt="Customer App 48px">
+      <span class="label">48px</span>
+    </div>
+    <div class="icon-wrap">
+      <img src="seller-app.svg" width="48" height="48" alt="Seller App 48px">
+      <span class="label">48px</span>
+    </div>
+    <div class="icon-wrap">
+      <img src="rider-app.svg" width="48" height="48" alt="Rider App 48px">
+      <span class="label">48px</span>
+    </div>
+  </div>
+
+  <h2>24px Micro Scale</h2>
+  <div class="row">
+    <img src="customer-app.svg" width="24" height="24" alt="Customer App 24px">
+    <img src="seller-app.svg" width="24" height="24" alt="Seller App 24px">
+    <img src="rider-app.svg" width="24" height="24" alt="Rider App 24px">
+  </div>
+</body>
+</html>
