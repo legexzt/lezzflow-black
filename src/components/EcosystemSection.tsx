@@ -10,7 +10,28 @@ export function EcosystemSection() {
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [views, setViews] = useState(1428);
+  const [views, setViews] = useState<number>(0);
+
+  const VIEWS_API_URL = 'https://sucm5unokluy36qm65tm6gfzne0rfrvm.lambda-url.us-east-1.on.aws/';
+
+  // Register genuine view only when video is played by the user (once per session)
+  const registerPlayView = async () => {
+    try {
+      if (typeof window === 'undefined') return;
+      if (!sessionStorage.getItem('lezzflow_video_played')) {
+        sessionStorage.setItem('lezzflow_video_played', '1');
+        const res = await fetch(`${VIEWS_API_URL}?action=view`);
+        if (res.ok) {
+          const data = await res.json();
+          if (typeof data.views === 'number') {
+            setViews(data.views);
+          }
+        }
+      }
+    } catch {
+      // Ignore network errors gracefully
+    }
+  };
 
   const toggleMute = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
@@ -27,7 +48,10 @@ export function EcosystemSection() {
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
         playPromise
-          .then(() => setIsPlaying(true))
+          .then(() => {
+            setIsPlaying(true);
+            registerPlayView();
+          })
           .catch(() => {});
       }
     } else {
@@ -64,21 +88,26 @@ export function EcosystemSection() {
     }
   };
 
+  // Fetch current genuine view count on initial load
   useEffect(() => {
-    // Persistent View Counter
-    const BASE_VIEWS = 1428;
-    try {
-      const stored = localStorage.getItem('lezzflow_video_views');
-      let count = stored ? parseInt(stored, 10) : BASE_VIEWS;
-      if (!sessionStorage.getItem('lezzflow_session_view')) {
-        count += 1;
-        localStorage.setItem('lezzflow_video_views', String(count));
-        sessionStorage.setItem('lezzflow_session_view', '1');
+    let isMounted = true;
+    const fetchGenuineViews = async () => {
+      try {
+        const res = await fetch(VIEWS_API_URL);
+        if (res.ok) {
+          const data = await res.json();
+          if (isMounted && typeof data.views === 'number') {
+            setViews(data.views);
+          }
+        }
+      } catch {
+        // Silent catch
       }
-      setViews(count);
-    } catch {
-      setViews(BASE_VIEWS);
-    }
+    };
+    fetchGenuineViews();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   useEffect(() => {
@@ -258,6 +287,7 @@ export function EcosystemSection() {
               loop
               playsInline
               preload="auto"
+              onPlay={registerPlayView}
               aria-label="LezzFlow 3-App Connected Ecosystem Video"
             />
 
@@ -303,11 +333,11 @@ export function EcosystemSection() {
 
             <div className="eco-toolbar-meta">
               {/* Views Counter */}
-              <div className="eco-views-badge" title="Verified presentation views">
+              <div className="eco-views-badge" title="Genuine real-time presentation views">
                 <span className="eco-views-dot" />
                 <Eye size={14} className="text-[#00e5ff]" />
                 <span className="eco-views-count">{views.toLocaleString()}</span>
-                <span className="eco-views-label">views</span>
+                <span className="eco-views-label">{views === 1 ? 'view' : 'views'}</span>
               </div>
 
               {/* Share Button */}
