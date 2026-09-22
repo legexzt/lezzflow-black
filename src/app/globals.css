@@ -2683,19 +2683,21 @@ body, html {
 /* Ecosystem Video Centerpiece */
 .ecosystem-showcase {
   margin-bottom: clamp(3rem, 5vw, 4.5rem);
+  display: flex;
+  justify-content: center;
 }
 
 .ecosystem-video-frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  min-height: 280px;
-  max-height: 580px;
-  border-radius: 20px;
+  max-width: 680px;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
   background: #070a10;
   border: 1px solid rgba(0, 118, 255, 0.3);
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75), 0 0 45px rgba(0, 118, 255, 0.14);
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .ecosystem-video {
@@ -2703,18 +2705,59 @@ body, html {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   z-index: 5;
   opacity: 0;
-  pointer-events: none;
+  cursor: pointer;
+  pointer-events: auto;
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #000;
 }
 
 .ecosystem-video.is-loaded {
   opacity: 1;
-  pointer-events: auto;
-  transform: scale(1.06);
-  transform-origin: top left;
+}
+
+.ecosystem-video-controls {
+  position: absolute;
+  bottom: 1.1rem;
+  right: 1.1rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.eco-video-ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.42rem 0.85rem;
+  background: rgba(10, 16, 28, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 99px;
+  color: #ffffff;
+  font-family: var(--font-geist-sans), -apple-system, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  user-select: none;
+}
+
+.eco-video-ctrl-btn:hover {
+  background: rgba(0, 118, 255, 0.25);
+  border-color: rgba(0, 118, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+.eco-video-ctrl-btn.is-active {
+  background: rgba(0, 118, 255, 0.35);
+  border-color: rgba(0, 229, 255, 0.6);
+  color: #00e5ff;
 }
 
 .ecosystem-fallback {

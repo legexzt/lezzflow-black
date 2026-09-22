@@ -1,12 +1,33 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Check } from 'lucide-react';
+import { Check, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { CustomerAppIcon, SellerAppIcon, RiderAppIcon } from './AppIcons';
 
 export function EcosystemSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!videoRef.current) return;
+    const nextMuted = !videoRef.current.muted;
+    videoRef.current.muted = nextMuted;
+    setIsMuted(nextMuted);
+  };
+
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    } else {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
 
   useEffect(() => {
     const video = videoRef.current;
@@ -190,13 +211,41 @@ export function EcosystemSection() {
               ref={videoRef}
               className={`ecosystem-video ${isVideoLoaded ? 'is-loaded' : ''}`}
               src="/videos/ecosystem-flow.mp4"
+              poster="/videos/ecosystem-poster.jpg"
               autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="auto"
+              onClick={togglePlay}
               aria-label="LezzFlow 3-App Connected Ecosystem Video"
             />
+
+            {/* Interactive Playback & Sound Controls */}
+            {isVideoLoaded && (
+              <div className="ecosystem-video-controls" onClick={(e) => e.stopPropagation()}>
+                <button
+                  type="button"
+                  onClick={togglePlay}
+                  className="eco-video-ctrl-btn"
+                  aria-label={isPlaying ? 'Pause video' : 'Play video'}
+                  title={isPlaying ? 'Pause' : 'Play'}
+                >
+                  {isPlaying ? <Pause size={13} /> : <Play size={13} />}
+                  <span>{isPlaying ? 'Pause' : 'Play'}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={toggleMute}
+                  className={`eco-video-ctrl-btn ${!isMuted ? 'is-active' : ''}`}
+                  aria-label={isMuted ? 'Enable Sound' : 'Mute Sound'}
+                  title={isMuted ? 'Enable Sound' : 'Mute Sound'}
+                >
+                  {isMuted ? <VolumeX size={13} /> : <Volume2 size={13} />}
+                  <span>{isMuted ? 'Sound Off' : 'Sound On'}</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
