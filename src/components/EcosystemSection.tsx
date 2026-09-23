@@ -1,16 +1,22 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Check, Play, Pause, Volume2, VolumeX, Share2, Eye } from 'lucide-react';
+import { Check, Play, Pause, Volume2, VolumeX, Share2, Eye, Languages, Sparkles } from 'lucide-react';
 import { CustomerAppIcon, SellerAppIcon, RiderAppIcon } from './AppIcons';
 
 export function EcosystemSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const hindiAudioRef = useRef<HTMLAudioElement>(null);
+
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [copied, setCopied] = useState(false);
   const [views, setViews] = useState<number>(0);
+
+  // Audio track state: default English ('en'), with recommended Hindi ('hi')
+  const [selectedAudio, setSelectedAudio] = useState<'en' | 'hi'>('en');
+  const [showHindiPrompt, setShowHindiPrompt] = useState(true);
 
   const VIEWS_API_URL = 'https://sucm5unokluy36qm65tm6gfzne0rfrvm.lambda-url.us-east-1.on.aws/';
 
@@ -33,30 +39,158 @@ export function EcosystemSection() {
     }
   };
 
-  const toggleMute = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    if (!videoRef.current) return;
-    const nextMuted = !videoRef.current.muted;
-    videoRef.current.muted = nextMuted;
-    setIsMuted(nextMuted);
+  // Switch between English (video native) and Hindi (separate track)
+  const selectAudioTrack = (track: 'en' | 'hi') => {
+    setSelectedAudio(track);
+    const video = videoRef.current;
+    const hindiAudio = hindiAudioRef.current;
+    if (!video) return;
+
+    if (track === 'hi') {
+      video.muted = true;
+      if (hindiAudio) {
+        hindiAudio.currentTime = video.currentTime;
+        hindiAudio.muted = isMuted;
+        if (!video.paused) {
+          hindiAudio.play().catch(() => {});
+        }
+      }
+    } else {
+      if (hindiAudio) {
+        hindiAudio.pause();
+      }
+      video.muted = isMuted;
+    }
   };
 
-  const togglePlay = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    if (!videoRef.current) return;
-    if (videoRef.current.paused) {
-      const playPromise = videoRef.current.play();
+  // 1-Click switch to Hindi with automatic unmute and playback sync
+  const handleSwitchToHindi = () => {
+    setShowHindiPrompt(false);
+    setSelectedAudio('hi');
+    setIsMuted(false);
+
+    const video = videoRef.current;
+    const hindiAudio = hindiAudioRef.current;
+
+    if (video) {
+      video.muted = true;
+    }
+    if (hindiAudio) {
+      hindiAudio.muted = false;
+      if (video) {
+        hindiAudio.currentTime = video.currentTime;
+      }
+    }
+
+    if (video && video.paused) {
+      const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
             setIsPlaying(true);
             registerPlayView();
+            if (hindiAudio) {
+              hindiAudio.play().catch(() => {});
+            }
+          })
+          .catch(() => {});
+      }
+    } else if (hindiAudio) {
+      hindiAudio.play().catch(() => {});
+    }
+  };
+
+  const toggleMute = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    const nextMuted = !isMuted;
+    setIsMuted(nextMuted);
+
+    if (selectedAudio === 'hi') {
+      if (videoRef.current) videoRef.current.muted = true; // Video track stays silent
+      if (hindiAudioRef.current) hindiAudioRef.current.muted = nextMuted;
+    } else {
+      if (videoRef.current) videoRef.current.muted = nextMuted;
+      if (hindiAudioRef.current) hindiAudioRef.current.pause();
+    }
+  };
+
+  const togglePlay = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    const video = videoRef.current;
+    const hindiAudio = hindiAudioRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      if (selectedAudio === 'hi') {
+        video.muted = true;
+        if (hindiAudio) {
+          hindiAudio.currentTime = video.currentTime;
+          hindiAudio.muted = isMuted;
+        }
+      } else {
+        video.muted = isMuted;
+        if (hindiAudio) hindiAudio.pause();
+      }
+
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+            registerPlayView();
+            if (selectedAudio === 'hi' && hindiAudio) {
+              hindiAudio.play().catch(() => {});
+            }
           })
           .catch(() => {});
       }
     } else {
-      videoRef.current.pause();
+      video.pause();
+      if (hindiAudio) hindiAudio.pause();
       setIsPlaying(false);
+    }
+  };
+
+  // Video event handlers for seamless audio sync
+  const handleVideoPlay = () => {
+    setIsPlaying(true);
+    registerPlayView();
+    if (selectedAudio === 'hi' && hindiAudioRef.current && videoRef.current) {
+      videoRef.current.muted = true;
+      hindiAudioRef.current.currentTime = videoRef.current.currentTime;
+      hindiAudioRef.current.muted = isMuted;
+      hindiAudioRef.current.play().catch(() => {});
+    }
+  };
+
+  const handleVideoPause = () => {
+    setIsPlaying(false);
+    if (hindiAudioRef.current) {
+      hindiAudioRef.current.pause();
+    }
+  };
+
+  const handleVideoSeeking = () => {
+    if (selectedAudio === 'hi' && hindiAudioRef.current && videoRef.current) {
+      hindiAudioRef.current.currentTime = videoRef.current.currentTime;
+    }
+  };
+
+  const handleVideoTimeUpdate = () => {
+    if (selectedAudio === 'hi' && hindiAudioRef.current && videoRef.current) {
+      const diff = Math.abs(hindiAudioRef.current.currentTime - videoRef.current.currentTime);
+      if (diff > 0.3) {
+        hindiAudioRef.current.currentTime = videoRef.current.currentTime;
+      }
+    }
+  };
+
+  const handleVideoEnded = () => {
+    if (hindiAudioRef.current) {
+      hindiAudioRef.current.currentTime = 0;
+      if (selectedAudio === 'hi' && videoRef.current && !videoRef.current.paused) {
+        hindiAudioRef.current.play().catch(() => {});
+      }
     }
   };
 
@@ -131,8 +265,13 @@ export function EcosystemSection() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting && video && !video.paused) {
-            video.pause();
+          if (!entry.isIntersecting) {
+            if (video && !video.paused) {
+              video.pause();
+            }
+            if (hindiAudioRef.current && !hindiAudioRef.current.paused) {
+              hindiAudioRef.current.pause();
+            }
             setIsPlaying(false);
           }
         });
@@ -283,12 +422,25 @@ export function EcosystemSection() {
               className={`ecosystem-video ${isVideoLoaded ? 'is-loaded' : ''}`}
               src="/videos/ecosystem-flow.mp4"
               poster="/videos/ecosystem-poster.jpg"
-              muted={isMuted}
+              muted={selectedAudio === 'hi' ? true : isMuted}
               loop
               playsInline
               preload="auto"
-              onPlay={registerPlayView}
+              onPlay={handleVideoPlay}
+              onPause={handleVideoPause}
+              onSeeking={handleVideoSeeking}
+              onSeeked={handleVideoSeeking}
+              onTimeUpdate={handleVideoTimeUpdate}
+              onEnded={handleVideoEnded}
               aria-label="LezzFlow 3-App Connected Ecosystem Video"
+            />
+
+            {/* Synchronized Hindi Audio Track */}
+            <audio
+              ref={hindiAudioRef}
+              src="/audio/ecosystem-hindi.mp3"
+              preload="auto"
+              playsInline
             />
 
             {/* Central Play Button Overlay (Visible ONLY when paused - Zero Subtitle Obstruction!) */}
@@ -306,6 +458,52 @@ export function EcosystemSection() {
               </button>
             )}
           </div>
+
+          {/* Hindi Audio Recommendation Banner */}
+          {showHindiPrompt && selectedAudio === 'en' && (
+            <div className="eco-hindi-rec-banner" role="status" aria-live="polite">
+              <div className="eco-rec-left">
+                <div className="eco-rec-icon-glow">
+                  <Sparkles size={15} className="text-[#ffd700]" />
+                </div>
+                <div className="eco-rec-copy">
+                  <div className="eco-rec-title-row">
+                    <span className="eco-rec-title">Hindi Voiceover Available (हिन्दी)</span>
+                    <span className="eco-rec-badge-pill">★ RECOMMENDED FOR SIH 2026</span>
+                  </div>
+                  <span className="eco-rec-desc">Watch the complete 2m 47s presentation with official Hindi narration</span>
+                </div>
+              </div>
+              <div className="eco-rec-actions">
+                <button
+                  type="button"
+                  onClick={handleSwitchToHindi}
+                  className="eco-rec-btn-action"
+                >
+                  <Volume2 size={13} />
+                  <span>Switch to Hindi Track</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowHindiPrompt(false)}
+                  className="eco-rec-btn-dismiss"
+                  title="Dismiss recommendation"
+                  aria-label="Dismiss recommendation"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Active Hindi Audio Pill Indicator */}
+          {selectedAudio === 'hi' && (
+            <div className="eco-hindi-active-pill">
+              <span className="eco-pulse-ring" />
+              <Volume2 size={13} className="text-[#3ddc97]" />
+              <span>Playing with <strong>Hindi (हिन्दी) Audio Track</strong> • Synchronized</span>
+            </div>
+          )}
 
           {/* Dedicated Media Toolbar Underneath Video (Completely Outside Video Frame) */}
           <div className="ecosystem-video-toolbar">
@@ -329,6 +527,35 @@ export function EcosystemSection() {
                 {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
                 <span>{isMuted ? 'Sound Off' : 'Sound On'}</span>
               </button>
+            </div>
+
+            {/* Audio Track Selector (English / Hindi Track) */}
+            <div className="eco-toolbar-audio">
+              <div className="eco-audio-selector" role="radiogroup" aria-label="Audio Track Language">
+                <span className="eco-audio-selector-label">
+                  <Languages size={13} className="text-[#8fa3bf]" />
+                  <span>Audio:</span>
+                </span>
+                <button
+                  type="button"
+                  onClick={() => selectAudioTrack('en')}
+                  className={`eco-audio-tab ${selectedAudio === 'en' ? 'is-active' : ''}`}
+                  aria-checked={selectedAudio === 'en'}
+                  role="radio"
+                >
+                  English
+                </button>
+                <button
+                  type="button"
+                  onClick={() => selectAudioTrack('hi')}
+                  className={`eco-audio-tab is-hindi ${selectedAudio === 'hi' ? 'is-active' : ''}`}
+                  aria-checked={selectedAudio === 'hi'}
+                  role="radio"
+                >
+                  <span>हिन्दी</span>
+                  <span className="eco-rec-pill">RECOMMENDED</span>
+                </button>
+              </div>
             </div>
 
             <div className="eco-toolbar-meta">
